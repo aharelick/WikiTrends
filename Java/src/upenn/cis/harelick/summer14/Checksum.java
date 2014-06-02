@@ -1,18 +1,19 @@
+package upenn.cis.harelick.summer14;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Checksum {
-	final private static char[] hexArray = "0123456789ABCDEF".toCharArray();
-	private static File file;
-	private static String hash;
+	final private char[] hexArray = "0123456789ABCDEF".toCharArray();
+	private File file;
+	private String hash;
 
 	public Checksum(File file, String hash) {
-		Checksum.file = file;
-		Checksum.hash = hash;
+		this.file = file;
+		this.hash = hash;
 	}
 	
-	public static boolean check() {
+	public boolean check() {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("MD5");
@@ -23,13 +24,12 @@ public class Checksum {
 		try {
 			digest = getDigest(new FileInputStream(file), md, 2048);
 		} catch (NoSuchAlgorithmException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return hash.equals(digest.toLowerCase()); 
 	}
 
-	private static String getDigest(InputStream is, MessageDigest md, int byteArraySize)
+	private String getDigest(InputStream is, MessageDigest md, int byteArraySize)
 			throws NoSuchAlgorithmException, IOException {
 
 		md.reset();
@@ -43,7 +43,7 @@ public class Checksum {
 		return result;
 	}
 	
-	private static String bytesToHex(byte[] bytes) {
+	private String bytesToHex(byte[] bytes) {
 	    char[] hexChars = new char[bytes.length * 2];
 	    for ( int j = 0; j < bytes.length; j++ ) {
 	        int v = bytes[j] & 0xFF;
