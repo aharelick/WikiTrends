@@ -15,8 +15,8 @@ target/
 *.db
 
 # Wiki Downloads #
-md5sums.txt
-*.gz 
+*.gz
+*/*/md5sums.txt
 ######################
 # OSX
 ######################
