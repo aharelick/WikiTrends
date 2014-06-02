@@ -1,5 +1,5 @@
-package harelick.summer14;
 import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -20,15 +20,22 @@ public class GetSpan {
 	
 	private static void givenLength(String date, int length, String sign) {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		int increment = 0;
+		if (sign.equals("+")) {
+			increment = 1;
+		} else {
+			increment = -1;
+		}
 		Calendar c = Calendar.getInstance();
 		for (int i = 0; i < length; i++) {
-			
 			try {
 				c.setTime(sdf.parse(date));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			c.add(Calendar.DATE, 1);
+			String[] args = {date};
+			GetDay.main(args);
+			c.add(Calendar.DATE, increment);
 			date = sdf.format(c.getTime());
 		}
 	}

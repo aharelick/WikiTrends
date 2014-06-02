@@ -1,4 +1,3 @@
-package harelick.summer14;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,6 +31,7 @@ public class GetDay {
 		downloadmd5();
 		readInmd5();
 		downloadstats();
+		cleanup();
 	}
 	
 	private static void parseHTMl(String month, String day, String year) {
@@ -148,5 +148,10 @@ public class GetDay {
 		} else {
 			System.out.println("directory exists, will fill the rest of directory");
 		}
+	}
+	
+	private static void cleanup() {
+		toDownload.clear();
+		hashes.clear();
 	}
 }
