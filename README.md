@@ -1,1 +1,4 @@
-Java Files for Downloading Wiki Stats
+WikiTrends
+==========
+
+Wikipedia Stats Download and Analyze
