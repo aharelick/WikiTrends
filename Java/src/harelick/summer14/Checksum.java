@@ -1,4 +1,4 @@
-package upenn.cis.harelick.summer14;
+package harelick.summer14;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

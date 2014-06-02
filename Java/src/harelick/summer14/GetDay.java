@@ -1,4 +1,4 @@
-package upenn.cis.harelick.summer14;
+package harelick.summer14;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
