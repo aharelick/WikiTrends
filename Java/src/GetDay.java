@@ -3,6 +3,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.jsoup.Jsoup;
@@ -26,6 +28,7 @@ public class GetDay {
 		month = inputSplit[0];
 		day = inputSplit[1];
 		year = inputSplit[2];
+		System.out.println("Requested Date: " + args[0]);
 		parseHTMl(month, day, year);
 		directoryCreate();
 		downloadmd5();
@@ -146,12 +149,13 @@ public class GetDay {
 		    	System.exit(0);
 		    }
 		} else {
-			System.out.println("directory exists, will fill the rest of directory");
+			System.out.println("directory (" + dir.toString() + ") exists, will validate checksums and fill the rest of directory");
 		}
 	}
 	
 	private static void cleanup() {
 		toDownload.clear();
 		hashes.clear();
+		System.out.println("-------------------------------");
 	}
 }

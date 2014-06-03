@@ -41,6 +41,25 @@ public class GetSpan {
 	}
 	
 	private static void startEndDate(String startDate, String endDate) {
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+		try {
+			c1.setTime(sdf.parse(startDate));
+			c2.setTime(sdf.parse(endDate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if (c2.getTimeInMillis() - c1.getTimeInMillis() < 0) {
+			System.out.println("2nd input must be >= first input");
+			System.exit(0);
+		}
+		while (c1.getTimeInMillis() <= c2.getTimeInMillis()) {
+			String[] args = {startDate};
+			GetDay.main(args);
+			c1.add(Calendar.DATE, 1);
+			startDate = sdf.format(c1.getTime());
+		}
+
 	}
 }
