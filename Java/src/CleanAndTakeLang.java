@@ -91,8 +91,8 @@ public class CleanAndTakeLang {
 			gzipStream.close();
 			decoder.close();
 			bf.close();
+			count++;
 		}
-		count++;
 	}
 	
 	private static void serialize() throws IOException {
