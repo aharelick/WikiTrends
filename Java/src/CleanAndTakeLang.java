@@ -103,8 +103,6 @@ public class CleanAndTakeLang {
 					title = cleanAnchors(title);
 					title = capitalizeFirst(title);
 					int views = Integer.parseInt(tokens[2]);
-					String date = getDateFromFile(file.getName());
-					int hour = getHourFromFile(file.getName());
 					if (map2.keySet().contains(title)) {
 						map2.put(title, (map2.get(title) + views));
 					} else {
