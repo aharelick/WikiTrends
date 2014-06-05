@@ -18,6 +18,8 @@ public class CleanAndTakeLang {
 	private static HashMap<String, Integer> map2 = new HashMap<String, Integer>();
 	// list of files that have been included in the sum
 	private static HashSet<String> readFiles = new HashSet<String>();
+	private static String folderName = null;
+	private static File resultsFolder = null;
 
 
 	
@@ -32,12 +34,20 @@ public class CleanAndTakeLang {
 			System.out.println("The input folder is not a folder");
 			System.exit(0);
 		}
-		if (checkForStoredFiles()) {
-			deserialize();
+//		if (checkForStoredFiles()) {
+//			deserialize();
+//		}
+		folderName = folder.toString();
+		resultsFolder = new File(folderName + "-results");
+		if (resultsFolder.mkdir()) {
+			System.out.println(resultsFolder.toString() + " directory created");
+		} else {
+			System.out.println(resultsFolder.toString() + " directory couldn't be created");
+			System.exit(0);
 		}
 		findFiles(folder);
 		clean();
-		serialize();
+		serializeList("readFiles-" + folderName + ".ser");
 	}
 	
 	private static boolean checkForStoredFiles() throws IOException {
@@ -67,7 +77,7 @@ public class CleanAndTakeLang {
 	private static void findFiles(File folder) throws IOException {
 		System.out.println("Finding gzipped files in " + folder.getName() + " ...");
 		for (File fileEntry : folder.listFiles()) {
-	        if (!fileEntry.isDirectory() && fileEntry.getName().endsWith(".gz") && !readFiles.contains(fileEntry.getName())) {
+	        if (!fileEntry.isDirectory() && fileEntry.getName().endsWith(".gz") /* && !readFiles.contains(fileEntry.getName()) */) {
 	        	files.add(fileEntry);	        	
 	        }
 	    }
@@ -103,10 +113,12 @@ public class CleanAndTakeLang {
 					title = cleanAnchors(title);
 					title = capitalizeFirst(title);
 					int views = Integer.parseInt(tokens[2]);
-					if (map2.keySet().contains(title)) {
-						map2.put(title, (map2.get(title) + views));
-					} else {
-						map2.put(title, views);
+					if (views > 4) {
+						if (map2.keySet().contains(title)) {
+							map2.put(title, (map2.get(title) + views));
+						} else {
+							map2.put(title, views);
+						}
 					}
 				}
 					line = bf.readLine();
@@ -115,8 +127,11 @@ public class CleanAndTakeLang {
 						System.out.print(" .");
 					}
 			}
-			count++;
 			System.out.println();
+			if ((count % 4 == 0) || count == files.size()) {
+				serializeMap("map-" + folderName + "-" + (int)(Math.ceil(count / 4.0)) + ".ser" );
+			}
+			count++;
 			readFiles.add(file.getName());
 			fileStream.close();
 			gzipStream.close();
@@ -174,21 +189,26 @@ public class CleanAndTakeLang {
 		}
 	}
 	*/
-	private static void serialize() throws IOException {
+	private static void serializeMap(String input) throws IOException {
 		System.out.println("Starting to serialize map");
-		FileOutputStream fos1 = new FileOutputStream("map.ser");
+		FileOutputStream fos1 = new FileOutputStream(resultsFolder.toString() + "/" + input);
 		ObjectOutputStream oos1 = new ObjectOutputStream(fos1);
 		oos1.writeObject(map2);
 		oos1.close();
 		fos1.close();
-		System.out.println("Serialized map data is saved in map.ser");
+		System.out.println("Serialized map data is saved in " + resultsFolder.toString() + "/" + input);
+		map2.clear();
+		System.out.println("map cleared");
+	}
+	
+	private static void serializeList(String input) throws IOException {
 		System.out.println("Starting to serialize readFiles list");
-		FileOutputStream fos2 = new FileOutputStream("read.ser");
+		FileOutputStream fos2 = new FileOutputStream(resultsFolder.toString() + "/" + input);
 		ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
 		oos2.writeObject(readFiles);
 		oos2.close();
 		fos2.close();
-		System.out.println("Serialized list data is saved in read.ser");
+		System.out.println("Serialized list data is saved in " + resultsFolder.toString() + "/" +  input);
 	}
 	
 	@SuppressWarnings("unchecked")
