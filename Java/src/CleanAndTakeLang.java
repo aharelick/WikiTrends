@@ -191,6 +191,7 @@ public class CleanAndTakeLang {
 		System.out.println("Serialized list data is saved in read.ser");
 	}
 	
+	@SuppressWarnings("unchecked")
 	private static void deserialize() throws IOException, ClassNotFoundException {
 		System.out.println("Starting to deserialize map");
 		FileInputStream fis1 = new FileInputStream("map.ser");
