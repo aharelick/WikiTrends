@@ -82,7 +82,10 @@ public class CleanAndTakeLangSQL {
 	private static void createTableCols() {
 		String sql = "CREATE TABLE " + tableName + " (link TEXT PRIMARY KEY NOT NULL);";
 		executeSQL(sql);
+		sql = "CREATE UNIQUE INDEX name ON " + tableName + "(link);";
+		executeSQL(sql);
 		System.out.println("Table " + tableName + " created successfully with primary key 'link'");
+		System.out.println("Index created successfully on link");
 	}
 
 	private static String addCol(int col) {
