@@ -20,6 +20,8 @@ public class CleanAndTakeLangSQL {
 	private static String tableName = null;
 	// just maps titles to summed views
 	private static HashMap<String, Integer> map = new HashMap<String, Integer>();
+	private static HashSet<String> insertedLinks = new HashSet<String>();
+
 	
 	public static void main(String args[]) throws FileNotFoundException, UnsupportedEncodingException, IOException, SQLException {
 		inputLanguage = args[0];
@@ -37,6 +39,7 @@ public class CleanAndTakeLangSQL {
 		openConnection();
 		createTableCols();
 		clean();
+		insertedLinks.clear();
 		stmt.close();
 		c.close();
 	}
@@ -82,10 +85,10 @@ public class CleanAndTakeLangSQL {
 	private static void createTableCols() {
 		String sql = "CREATE TABLE " + tableName + " (link TEXT PRIMARY KEY NOT NULL);";
 		executeSQL(sql);
-		sql = "CREATE UNIQUE INDEX name ON " + tableName + "(link);";
-		executeSQL(sql);
+		//sql = "CREATE UNIQUE INDEX name ON " + tableName + "(link);";
+		//executeSQL(sql);
 		System.out.println("Table " + tableName + " created successfully with primary key 'link'");
-		System.out.println("Index created successfully on link");
+		//System.out.println("Index created successfully on link");
 	}
 
 	private static String addCol(int col) {
@@ -162,7 +165,7 @@ public class CleanAndTakeLangSQL {
 			decoder.close();
 			bf.close();
 			map.clear();
-			System.out.println("Map cleared, onto the next one");
+			System.out.println("Storage cleared, onto the next one");
 		}
 	}
 	
@@ -172,10 +175,12 @@ public class CleanAndTakeLangSQL {
 		System.out.print("Starting map to sql .");
 		for (Entry<String, Integer> e : map.entrySet()) {
 			String key = escapeSingleQuotes(e.getKey());
-			if (keyExists("SELECT EXISTS(SELECT 1 FROM " + tableName + " WHERE link='" + key + "' LIMIT 1);")) {
+			//if (keyExists("SELECT EXISTS(SELECT 1 FROM " + tableName + " WHERE link='" + key + "' LIMIT 1);")) {
+			if (insertedLinks.contains(key)) {
 				executeSQL("UPDATE " + tableName + " SET " + colName + "=" + e.getValue() + " WHERE link='" + key + "';");
 			} else {
 				executeSQL("INSERT INTO [04-01-2014](link, " + colName + ") VALUES('" + key + "', " + e.getValue() + ");");
+				insertedLinks.add(key);
 			}
 			count++;
 			if (count % 15000 == 0) {
