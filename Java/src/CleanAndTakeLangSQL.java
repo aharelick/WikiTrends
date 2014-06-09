@@ -83,6 +83,7 @@ public class CleanAndTakeLangSQL {
 	}
 
 	private static void createTableCols() {
+		//String sql = "CREATE TABLE " + tableName + " (Id INTEGER PRIMARY KEY AUTOINCREMENT, link TEXT NOT NULL);";
 		String sql = "CREATE TABLE " + tableName + " (link TEXT PRIMARY KEY NOT NULL);";
 		executeSQL(sql);
 		//sql = "CREATE UNIQUE INDEX name ON " + tableName + "(link);";
@@ -158,7 +159,10 @@ public class CleanAndTakeLangSQL {
 					}
 			}
 			System.out.println("\nFinished mapping");
+			long a = System.nanoTime();
 			mapToSQL(count - 1);
+			long b = System.nanoTime();
+			System.out.println("Duration: " + (b - a));
 			count++;
 			fileStream.close();
 			gzipStream.close();
@@ -179,7 +183,7 @@ public class CleanAndTakeLangSQL {
 			if (insertedLinks.contains(key)) {
 				executeSQL("UPDATE " + tableName + " SET " + colName + "=" + e.getValue() + " WHERE link='" + key + "';");
 			} else {
-				executeSQL("INSERT INTO [04-01-2014](link, " + colName + ") VALUES('" + key + "', " + e.getValue() + ");");
+				executeSQL("INSERT INTO " + tableName + "(link, " + colName + ") VALUES('" + key + "', " + e.getValue() + ");");
 				insertedLinks.add(key);
 			}
 			count++;
