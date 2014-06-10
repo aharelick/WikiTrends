@@ -21,12 +21,14 @@ public class CleanAndTakeLangSQL {
 	// just maps titles to summed views
 	private static HashMap<String, Integer> map = new HashMap<String, Integer>();
 	private static HashSet<String> insertedLinks = new HashSet<String>();
+	private static int startFile = 1;
 
 	
 	public static void main(String args[]) throws FileNotFoundException, UnsupportedEncodingException, IOException, SQLException {
 		inputLanguage = args[0];
 		File folder = new File(args[1]);
 		tableName = "[" + args[1] + "]";
+		//startFile = Integer.parseInt(args[2]);
 		if (!folder.exists()) {
 			System.out.println("The input folder does not exist");
 			System.exit(0);
@@ -144,7 +146,7 @@ public class CleanAndTakeLangSQL {
 					title = cleanAnchors(title);
 					title = capitalizeFirst(title);
 					int views = Integer.parseInt(tokens[2]);
-					if (views > 4) {
+					if (views > 14) {
 						if (map.keySet().contains(title)) {
 							map.put(title, (map.get(title) + views));
 						} else {
