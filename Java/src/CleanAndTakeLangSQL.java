@@ -164,7 +164,7 @@ public class CleanAndTakeLangSQL {
 			long a = System.nanoTime();
 			mapToSQL(count - 1);
 			long b = System.nanoTime();
-			System.out.println("Duration: " + (b - a));
+			System.out.println("Duration: " + ((b - a)/1E9) + "s");
 			count++;
 			fileStream.close();
 			gzipStream.close();
@@ -179,6 +179,7 @@ public class CleanAndTakeLangSQL {
 		int count = 0;
 		String colName = addCol(hour);
 		System.out.print("Starting map to sql .");
+		executeSQL("BEGIN TRANSACTION;");
 		for (Entry<String, Integer> e : map.entrySet()) {
 			String key = escapeSingleQuotes(e.getKey());
 			//if (keyExists("SELECT EXISTS(SELECT 1 FROM " + tableName + " WHERE link='" + key + "' LIMIT 1);")) {
@@ -189,10 +190,11 @@ public class CleanAndTakeLangSQL {
 				insertedLinks.add(key);
 			}
 			count++;
-			if (count % 15000 == 0) {
+			if (count % 4600 == 0) {
 				System.out.print(" .");
 			}
 		}
+		executeSQL("COMMIT;");
 		System.out.println("\nSQL column successfully filled");
 	}
 	
