@@ -107,7 +107,7 @@ public class CleanAndTakeLangSQL {
 		}
 		String sql = "ALTER TABLE " + tableName + " ADD COLUMN " + colName + " INTEGER;";
 		executeSQL(sql);
-		System.out.println("Column " + colName + " was created successfully" );
+		//System.out.println("Column " + colName + " was created successfully" );
 		return colName;
 	}
 	
@@ -126,7 +126,6 @@ public class CleanAndTakeLangSQL {
 	}
 	
 	private static void clean() throws FileNotFoundException, UnsupportedEncodingException, IOException {
-		System.out.println("Starting to clean files...");
 		int count = 1;
 		for (File file : files) {
 			System.out.println("Cleaning file number: " + count + " (" + file.getName() + ")");
@@ -137,7 +136,6 @@ public class CleanAndTakeLangSQL {
 			BufferedReader bf = new BufferedReader(decoder);
 			String line;
 			while (!(line = bf.readLine()).startsWith(inputLanguage + " "));
-			System.out.println("Found language: " + inputLanguage);
 			System.out.print("Reading lines .");
 			long lineNum = 1;
 			while (bf.ready()) {
@@ -164,18 +162,17 @@ public class CleanAndTakeLangSQL {
 						System.out.print(" .");
 					}
 			}
-			System.out.println("\nFinished mapping");
+			System.out.println("\n");
 			long a = System.nanoTime();
 			mapToSQL(count - 1);
 			long b = System.nanoTime();
-			System.out.println("Duration: " + ((b - a)/1E9) + "s");
+			//System.out.println("Duration: " + ((b - a)/1E9) + "s");
 			count++;
 			fileStream.close();
 			gzipStream.close();
 			decoder.close();
 			bf.close();
 			map.clear();
-			System.out.println("Storage cleared, onto the next one");
 		}
 	}
 	
@@ -199,7 +196,7 @@ public class CleanAndTakeLangSQL {
 			}
 		}
 		executeSQL("COMMIT;");
-		System.out.println("\nSQL column successfully filled");
+		System.out.println("\n");
 	}
 	
 	private static String escapeSingleQuotes(String input) {
