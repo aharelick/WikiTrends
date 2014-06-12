@@ -162,7 +162,7 @@ public class CleanAndTakeLangSQL {
 						System.out.print(" .");
 					}
 			}
-			System.out.println("\n");
+			System.out.println();
 			long a = System.nanoTime();
 			mapToSQL(count - 1);
 			long b = System.nanoTime();
@@ -196,7 +196,7 @@ public class CleanAndTakeLangSQL {
 			}
 		}
 		executeSQL("COMMIT;");
-		System.out.println("\n");
+		System.out.println();
 	}
 	
 	private static String escapeSingleQuotes(String input) {
