@@ -16,7 +16,7 @@ public class CleanAndTakeLangSQL {
 		"Portal:", "Wikipedia:", "Wikipedia_talk:", "P:", "N:"};
 	private static String[] blacklist = {"404_error", "Main_Page", "Hypertext_Transfer_Protocol",
 		"Favicon.ico", "Search", "index.html", "Wiki"};
-	private static String[] imgExt = {"jpg", "gif", "png", "JPG", "PNG", "GIF", "txt", "ico"};
+	private static String[] imgExt = {".jpg", ".gif", ".png", ".JPG", ".PNG", ".GIF", ".txt", ".ico"};
 	private static String tableName = null;
 	// just maps titles to summed views
 	private static HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -25,6 +25,10 @@ public class CleanAndTakeLangSQL {
 
 	
 	public static void main(String args[]) throws FileNotFoundException, UnsupportedEncodingException, IOException, SQLException {
+		if (args.length != 3) {
+			System.out.println("Args: lang folder_with_gzips db_name");
+			System.exit(0);
+		}
 		inputLanguage = args[0];
 		File folder = new File(args[1]);
 		tableName = "[" + args[1] + "]";
@@ -38,7 +42,7 @@ public class CleanAndTakeLangSQL {
 			System.exit(0);
 		}
 		findFiles(folder);
-		openConnection();
+		openConnection(args[2]);
 		createTableCols();
 		clean();
 		insertedLinks.clear();
@@ -46,11 +50,11 @@ public class CleanAndTakeLangSQL {
 		c.close();
 	}
 
-	private static void openConnection() {
+	private static void openConnection(String db) {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:data.db");
-			System.out.println("Opened data.db successfully");
+			c = DriverManager.getConnection("jdbc:sqlite:" + db);
+			System.out.println("Opened " + db + "successfully");
 			stmt = c.createStatement();
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -204,7 +208,7 @@ public class CleanAndTakeLangSQL {
 	
 	private static boolean kosherLink(String input) {
 		for (String title : nameSpaces) {
-			if (input.startsWith(title + ":")) {
+			if (input.startsWith(title)) {
 				return false;
 			}
 		}
@@ -212,7 +216,7 @@ public class CleanAndTakeLangSQL {
 			return false;
 		}
 		for (String extension : imgExt) {
-			if (input.endsWith("." + extension)) {
+			if (input.endsWith(extension)) {
 				return false;
 			}
 		}
