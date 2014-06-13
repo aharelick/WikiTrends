@@ -10,11 +10,12 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class SumSpansDiffSort {
+	// sqlite connections and statements
 	private static Connection c = null;
     private static Statement stmt = null;
+    // maps each title to its trend value
     private static HashMap<String, Integer> trendValues = new HashMap<String, Integer>();
-    private static final String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
-    	"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+    // the text file that the results will be printed to
     private static File outputFile;
 
 	public static void main(String args[]) throws FileNotFoundException, UnsupportedEncodingException, IOException, SQLException {
@@ -35,6 +36,12 @@ public class SumSpansDiffSort {
 		printSorted(entriesSortedByValues());
 	}
 	
+	/**
+	 * Uses the sqlite3 jdbc jar to connect to a database. It also sets a global variable
+	 * that will be used for statements throughout the program.
+	 * 
+	 * @param db - the name of the database to open a connection with
+	 */
 	private static void openConnection(String db) {
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -47,39 +54,54 @@ public class SumSpansDiffSort {
 		}
 	}
 	
+	/**
+	 * Queries the database for all the data in a certain table. Then it goes across
+	 * every row and sums the integers. It also applies the correct multiplier (1 or -1)
+	 * depending on whether the current date is in the first or second span.
+	 * 
+	 * @param day  - the day we want data for (the table name)
+	 * @param sign - whether we should multiply the sum by -1 or 1 
+	 */
 	private static void calcDay(String day, int sign) {
 		long startTime = System.nanoTime();
 		ResultSet rs = null;
 		try {
-			//for (String hour: hours) {
-				//rs = stmt.executeQuery("SELECT " + hour + " from [" + day + "] WHERE hour" + hour + " IS NOT NULL;");
-				rs = stmt.executeQuery("SELECT * from [" + day + "];");
-				while (rs.next()) {
-					int count = 0;
-					String link = rs.getString(1);
-					for (int i = 2; i <= 25; i++) {
-						count+=rs.getInt(i);
-					}
-					count*=sign;
-					//String link = rs.getString(1);
-					//int count = rs.getInt(2) * sign;
-					Integer temp;
-					if ((temp = trendValues.get(link)) != null) {
-						trendValues.put(link, temp + count);
-					} else {
-						trendValues.put(link, count);
-					}
+			rs = stmt.executeQuery("SELECT * from [" + day + "];");
+			// iterating down the table (looking at each row)
+			while (rs.next()) {
+				int count = 0;
+				String link = rs.getString(1); // article title
+				// iterating across the columns (left -> right)
+				for (int i = 2; i <= 25; i++) {
+					count += rs.getInt(i);
 				}
-				rs.close();
-			//}
+				count *= sign;
+				Integer temp;
+				if ((temp = trendValues.get(link)) != null) {
+					trendValues.put(link, temp + count);
+				} else {
+					trendValues.put(link, count);
+				}
+			}
+			rs.close();
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 		long endTime = System.nanoTime();
-		System.out.println("Done with " + day + " - Duration: " + (endTime - startTime)/1E9 + "s");
+		System.out.println("Done with " + day + " - Duration: "
+				+ (endTime - startTime) / 1E9 + "s");
 	}
 	
+	/**
+	 * This method iterates through a calendar and calls calcDay for each date. 
+	 * It begins at the start date and goes through each day until it reaches the 
+	 * end date (the end date is included).
+	 * 
+	 * @param startDate - the date to start the roll
+	 * @param endDate   - the last day counted
+	 * @param sign      - whether we should multiply the sum by -1 or 1 (first or second span?)
+	 */
 	private static void roll(String startDate, String endDate, int sign) {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 		Calendar c1 = Calendar.getInstance();
@@ -105,11 +127,19 @@ public class SumSpansDiffSort {
 		}
 	}
 	
+	/**
+	 * Converts a global variable hashmap which is unordered by definition 
+	 * into a sorted set of entries. Each entry is the article title and 
+	 * it's trend value. The entries are sorted from greatest to least trend value.
+	 * 
+	 * @return - the sorted set of entries (the entries originally come from the hashmap).
+	 */
 	private static SortedSet<Map.Entry<String, Integer>> entriesSortedByValues() {
 	    SortedSet<Entry<String, Integer>> sortedEntries = new TreeSet<Entry<String, Integer>>(
 	        new Comparator<Entry<String, Integer>>() {
 	            @Override
 	            public int compare(Entry<String, Integer> e1, Entry<String, Integer> e2) {
+	            	// e2 before e1 because we want greatest to least
 	                return e2.getValue().compareTo(e1.getValue());
 	            }
 	        }
@@ -119,8 +149,14 @@ public class SumSpansDiffSort {
 	    return sortedEntries;
 	}
 	
+	/**
+	 * Iterates through a set of entries and prints every line in the format:
+	 * TrendValue     ArticleTitle
+	 * There are 5 spaces, NOT A TAB, between the two fields.
+	 *  
+	 * @param set - the sorted set of entries that we want to print
+	 */
 	private static void printSorted(SortedSet<Entry<String, Integer>> set) {
-		System.out.println("Start printing to " + outputFile.toString() + " . . .");
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter(outputFile, "UTF-8");
@@ -131,7 +167,7 @@ public class SumSpansDiffSort {
 			writer.println(e.getValue() + "     " + e.getKey());
 		}
 		writer.close();
-		System.out.println("Done printing");
+		System.out.println("Done printing to " + outputFile.toString());
 	}
 
 	
