@@ -287,7 +287,7 @@ public class CleanAndTakeLangSQL {
 				executeSQL("UPDATE " + tableName + " SET " + colName + "=" + e.getValue() + " WHERE link='" + escapedKey + "';");
 			} else {
 				executeSQL("INSERT INTO " + tableName + "(link, " + colName + ") VALUES('" + escapedKey + "', " + e.getValue() + ");");
-				insertedLinks.add(escapedKey);
+				insertedLinks.add(key);
 			}
 			count++;
 			// a way to see progress by printing periods
