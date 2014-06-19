@@ -54,6 +54,7 @@ public class CleanAndTakeLangSQL {
 		findFiles(folder);
 		openConnection(args[2]);
 		createTableCols();
+		populateInsertedLinks();
 		clean();
 		insertedLinks.clear();
 		stmt.close();
@@ -168,6 +169,20 @@ public class CleanAndTakeLangSQL {
 		return colName;
 	}
 	
+	private static void populateInsertedLinks() {
+		String sql = "SELECT link FROM " + tableName + ";";
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String link = rs.getString(1);
+				insertedLinks.add(link);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Using a command line argument the method goes into a directory and gathers all
 	 * files with the extension .gz and stores their file names. This assumes that 
@@ -183,11 +198,6 @@ public class CleanAndTakeLangSQL {
 	        	files.add(fileEntry);	        	
 	        }
 	    }
-		// currently this class only works if all 24 files are present for the day
-//		if (files.size() != 24) {
-//			System.out.println("There less than 24 gzip files found");
-//			System.exit(0);
-//		}
 		System.out.println("Found " + files.size() + " files, good to go");
 	}
 	
