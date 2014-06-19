@@ -67,12 +67,13 @@ public class SumSpansDiffSort {
 		ResultSet rs = null;
 		try {
 			rs = stmt.executeQuery("SELECT * from [" + day + "];");
+			int numCol = rs.getMetaData().getColumnCount();
 			// iterating down the table (looking at each row)
 			while (rs.next()) {
 				int count = 0;
 				String link = rs.getString(1); // article title
 				// iterating across the columns (left -> right)
-				for (int i = 2; i <= 25; i++) {
+				for (int i = 2; i <= numCol; i++) {
 					count += rs.getInt(i);
 				}
 				count *= sign;

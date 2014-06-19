@@ -26,11 +26,18 @@ public class CleanAndTakeLangSQL {
 	private static HashMap<String, Integer> map = new HashMap<String, Integer>();
 	// tracks if we have already inserted that link into today's table in the db
 	private static HashSet<String> insertedLinks = new HashSet<String>();
+	private static File filesReadFile = null;
+	private static HashSet<String> readFiles = new HashSet<String>();
+	
 	
 	public static void main(String args[]) throws FileNotFoundException, UnsupportedEncodingException, IOException, SQLException {
-		if (args.length != 3) {
-			System.out.println("Args: language folder_with_gzips db_name");
+		if (args.length != 4) {
+			System.out.println("Args: language folder_with_gzips db_name list_of_files_read");
 			System.exit(0);
+		} 
+		filesReadFile = new File(args[3]);
+		if (filesReadFile.exists()) {
+			readInDoneFiles(filesReadFile);
 		}
 		inputLanguage = args[0];
 		File folder = new File(args[1]);
@@ -51,6 +58,51 @@ public class CleanAndTakeLangSQL {
 		insertedLinks.clear();
 		stmt.close();
 		c.close();
+		writeOutDoneFiles(filesReadFile);
+	}
+	
+	/**
+	 * Reads a text file that contains the file names that have already been 
+	 * added to the database. These files should clearly not be added again.
+	 * 
+	 * @param file - the file to be looked through
+	 */
+	private static void readInDoneFiles(File file) {
+		BufferedReader r = null;
+		try {
+			r = new BufferedReader(new FileReader(file));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			while (r.ready()) {
+				readFiles.add(r.readLine());
+			}
+			r.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * Reads a text file that contains the file names that have already been 
+	 * added to the database. These files should clearly not be added again.
+	 * 
+	 * @param file - the file to output the files that have been parsed to
+	 */
+	private static void writeOutDoneFiles(File file) {
+		PrintWriter w = null;
+		try {
+			w = new PrintWriter(new FileWriter(file));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		for (String s : readFiles) {
+			w.println(s);
+		}
+		w.flush();
+		w.close();
 	}
 
 	/**
@@ -94,9 +146,9 @@ public class CleanAndTakeLangSQL {
 		* meaning it is unique and used as the identifier for the row. It of course cannot
 		* be null.
 		*/
-		String sql = "CREATE TABLE " + tableName + " (link TEXT PRIMARY KEY NOT NULL);";
+		String sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (link TEXT PRIMARY KEY NOT NULL) ;";
 		executeSQL(sql);
-		System.out.println("Table " + tableName + " created successfully with primary key 'link'");
+		System.out.println("Table " + tableName + " is ready");
 	}
 
 	/**
@@ -128,15 +180,15 @@ public class CleanAndTakeLangSQL {
 	private static void findFiles(File folder) {
 		System.out.println("Finding gzipped files in " + folder.getName() + " ...");
 		for (File fileEntry : folder.listFiles()) {
-	        if (!fileEntry.isDirectory() && fileEntry.getName().endsWith(".gz")) {
+	        if (!fileEntry.isDirectory() && fileEntry.getName().endsWith(".gz") && !readFiles.contains(fileEntry)) {
 	        	files.add(fileEntry);	        	
 	        }
 	    }
 		// currently this class only works if all 24 files are present for the day
-		if (files.size() != 24) {
-			System.out.println("There less than 24 gzip files found");
-			System.exit(0);
-		}
+//		if (files.size() != 24) {
+//			System.out.println("There less than 24 gzip files found");
+//			System.exit(0);
+//		}
 		System.out.println("Found " + files.size() + " files, good to go");
 	}
 	
@@ -149,9 +201,9 @@ public class CleanAndTakeLangSQL {
 	 * @throws IOException
 	 */
 	private static void clean() throws FileNotFoundException, UnsupportedEncodingException, IOException {
-		int count = 1; // the current file of 24 that is being cleaned
 		for (File file : files) {
-			System.out.println("Cleaning file number: " + count + " (" + file.getName() + ")");
+			int count = Integer.parseInt((file.toString()).split("-")[2].substring(0, 2)) + 1;
+			System.out.println("Cleaning file number: " + count + " (" + file.getName() + ") of 24");
 			// the classes to read a gzip
 			InputStream fileStream = new FileInputStream(file);
 			InputStream gzipStream = null;
@@ -201,6 +253,7 @@ public class CleanAndTakeLangSQL {
 			bf.close();
 			// only want to collect/store data for an hour at a time
 			map.clear();
+			readFiles.add(file.toString());
 		}
 	}
 	
