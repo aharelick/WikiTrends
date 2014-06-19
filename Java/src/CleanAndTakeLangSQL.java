@@ -82,7 +82,6 @@ public class CleanAndTakeLangSQL {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	/**
@@ -180,7 +179,7 @@ public class CleanAndTakeLangSQL {
 	private static void findFiles(File folder) {
 		System.out.println("Finding gzipped files in " + folder.getName() + " ...");
 		for (File fileEntry : folder.listFiles()) {
-	        if (!fileEntry.isDirectory() && fileEntry.getName().endsWith(".gz") && !readFiles.contains(fileEntry)) {
+	        if (!fileEntry.isDirectory() && fileEntry.getName().endsWith(".gz") && !readFiles.contains(fileEntry.getName())) {
 	        	files.add(fileEntry);	        	
 	        }
 	    }
