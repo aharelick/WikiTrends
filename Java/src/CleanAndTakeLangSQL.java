@@ -279,14 +279,15 @@ public class CleanAndTakeLangSQL {
 		// use a single transaction for each hour increase speed
 		executeSQL("BEGIN TRANSACTION;");
 		for (Entry<String, Integer> e : map.entrySet()) {
+			String key = e.getKey();
 			// have to escape single quotes
-			String key = escapeSingleQuotes(e.getKey());
+			String escapedKey = escapeSingleQuotes(key);
 			// if we already have a row in the table for that article
 			if (insertedLinks.contains(key)) {
-				executeSQL("UPDATE " + tableName + " SET " + colName + "=" + e.getValue() + " WHERE link='" + key + "';");
+				executeSQL("UPDATE " + tableName + " SET " + colName + "=" + e.getValue() + " WHERE link='" + escapedKey + "';");
 			} else {
-				executeSQL("INSERT INTO " + tableName + "(link, " + colName + ") VALUES('" + key + "', " + e.getValue() + ");");
-				insertedLinks.add(key);
+				executeSQL("INSERT INTO " + tableName + "(link, " + colName + ") VALUES('" + escapedKey + "', " + e.getValue() + ");");
+				insertedLinks.add(escapedKey);
 			}
 			count++;
 			// a way to see progress by printing periods
