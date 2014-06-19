@@ -86,7 +86,7 @@ public class CleanAndTakeLangSQL {
 	}
 	
 	/**
-	 * Reads a text file that contains the file names that have already been 
+	 * Writes a text file that contains the file names that have already been 
 	 * added to the database. These files should clearly not be added again.
 	 * 
 	 * @param file - the file to output the files that have been parsed to
@@ -115,7 +115,7 @@ public class CleanAndTakeLangSQL {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:" + db);
-			System.out.println("Opened " + db + "successfully");
+			System.out.println("Opened " + db + " successfully");
 			stmt = c.createStatement(); // used for all sqlite statements
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -202,7 +202,7 @@ public class CleanAndTakeLangSQL {
 	 */
 	private static void clean() throws FileNotFoundException, UnsupportedEncodingException, IOException {
 		for (File file : files) {
-			int count = Integer.parseInt((file.toString()).split("-")[2].substring(0, 2)) + 1;
+			int count = Integer.parseInt((file.getName()).split("-")[2].substring(0, 2)) + 1;
 			System.out.println("Cleaning file number: " + count + " (" + file.getName() + ") of 24");
 			// the classes to read a gzip
 			InputStream fileStream = new FileInputStream(file);
@@ -253,7 +253,7 @@ public class CleanAndTakeLangSQL {
 			bf.close();
 			// only want to collect/store data for an hour at a time
 			map.clear();
-			readFiles.add(file.toString());
+			readFiles.add(file.getName());
 		}
 	}
 	
