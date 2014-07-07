@@ -190,10 +190,18 @@ public class FindTrends {
 					maxIndex = i;
 				}
 			}
-			if (((maxIndex != array.length - 1) && array[maxIndex + 1] < (.1 * max))){
-				sum -= max;
+			if (maxIndex != array.length - 1) {
+				boolean trendOver = false;
+				for (int i = maxIndex + 1; i < array.length; i++) {
+					if (trendOver = (array[i] < (.1 * max))) {
+						break;
+					}
+				}
+				if (!trendOver) {
+					trendValues2.put(key, sum);
+				}
+				
 			}
-			trendValues2.put(key, sum);
 		}
 	}
 	
