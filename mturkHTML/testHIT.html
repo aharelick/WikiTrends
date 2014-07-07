@@ -1,0 +1,75 @@
+<!-- Bootstrap v3.0.3 -->
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<section class="container" id="Survey" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
+	<div class="row col-xs-12 col-md-12">
+		<!-- Instructions -->
+		<div class="panel panel-primary">
+			<div class="panel-heading"><strong>Instructions</strong></div>
+			<div class="panel-body">
+				<p>Please read the instructions before beginning:</p>
+				<ul>
+					<li>This HIT consists of 20 sections. Please complete all the questions.</li>
+					<li>Each section consists of the same 3 questions, but the topic will change in each section.</li>
+					<li>Please make sure you read the topic above each section and answer the questions with that topic in mind.</li></br>
+					<li><u>Question 1:</u> Please visit the Wikipedia URL provided in the links section and check to make sure the article exists and has not been deleted or made up.</li>
+					<li><u>Question 2:</u> Please pick the best description of the topic. If you do not know what the topic is, feel free to use the Google News link to see if there were any recent articles.
+						<ul>
+							<li>Currently Trending: The topic has been in the news over the past 2 days and there have been many recently published articles on the topic.</li>
+							<li>Recently Trending: There were a lot of articles published 3-7 days ago, but it's popularity has lowered in the past day or two.</li>
+							<li>Not Trending: This topic has not appeared in the news or popular culture at all over the past week.</li>
+						</ul></br>
+						Be careful of topics that are continually popular, like President Obama. While it may seem like he is trending all the time, and there may be articles about him, he is not considered trending unless he is above his usual level of popularity.
+					</li>
+					<li><u>Question 3:</u>Give a one line description of why the topic is trending. This can be taken from your own knowledge or from a news headline. It should give some insight into why people currently find the topic important.</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Instructions -->
+		<!-- Survey Body -->
+		<section>
+			<div class="row col-xs-12 col-md-12 links">
+				<b>Links/Resources:</b></br>
+				<span><u>Topic:</u> ${Decoded1}</span></br>
+				<span><u>Wikipedia Link:</u><a href="${WikiURL1}"> ${WikiURL1}</a></span></br>
+				<span><u>Google News Link:</u><a href="${NewsURL1}"> ${NewsURL1}</a></span></br>
+			</div>
+			<div class="row col-xs-12 col-md-12 question1">
+				<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+				<div class="radio"><label><input class="q2input" name="Relevance" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+				<div class="radio"><label><input class="q2input" name="Relevance" type="radio" value="Recent"/>Was Recently Trending</label></div>
+				<div class="radio"><label><input class="q2input" name="Relevance" type="radio" value="Not"/>Not Trending</label></div>
+			</div>
+			<div class="row col-xs-12 col-md-12 question3">
+				<div class="question input-group"><label>3. Why is/was this topic trending?</label> <input class="form-control q3input" name="Why" size="120" type="text" /></div>
+			</div>
+
+		</section>
+		<!-- End Survey Body -->
+	</div>
+</section>
+<!-- close container -->
+<style type="text/css">
+fieldset { padding: 10px; background:#fbfbfb; border-radius:5px; margin-bottom:5px; }
+.links {padding-bottom: 10px;}
+.question1 {padding-bottom: 10px;}
+</style>
+<script>
+var html = "";
+for (var i = 1; i <=20; i++) {
+	var num = i + "";
+	if (i < 10) {
+		num = "0" + num;
+	}
+	html = html + '<section><fieldset><div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded' + num + '}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL' + num + '}"> ${WikiURL' + num + '}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL' + num + '}"> ${NewsURL' + num + '}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div><div class="row col-xs-6 col-md-6 question1"><b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) <div class="radio"><label><input class="q1input" name="Exist' + num + '" type="radio" value="Yes" checked="true"/>This Page Exists </label></div><div class="radio"><label><input class="q1input" name="Exist' + num + '" type="radio" value="No"/>The Page Does Not Exist </label></div><div class="radio"><label><input class="q1input" name="Exist' + num + '" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div></div><div class="row col-xs-6 col-md-6 question2"><b>2. Which of the following best describes the topic\'s relevance? </b></br>(See instructions for clarification on choices)<div class="radio"><label><input class="q2input" name="Relevance' + num + '" type="radio" value="Current" checked="true"/>Currently Trending</label></div><div class="radio"><label><input class="q2input" name="Relevance' + num + '" type="radio" value="Recent"/>Was Recently Trending</label></div><div class="radio"><label><input class="q2input" name="Relevance' + num + '" type="radio" value="Not"/>Not Trending</label></div></div><div class="row col-xs-12 col-md-12 question3"><div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why' + num + '" size="120" type="text"/></div></div></fieldset></section>'
+}
+console.log(html);
+	/*$(".q2input").click(function() {
+		if (($(this).attr("value")) == 'Not') {
+			$('.q3input').attr('disabled', 'disabled')
+		} else {
+			$('.q3input').removeAttr('disabled')
+		}
+	}); */
+</script>

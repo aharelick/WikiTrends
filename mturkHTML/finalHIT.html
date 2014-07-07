@@ -1,0 +1,441 @@
+<!-- Bootstrap v3.0.3 -->
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<section class="container" id="Survey" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
+	<div class="row col-xs-12 col-md-12">
+		<!-- Instructions -->
+		<div class="panel panel-primary">
+			<div class="panel-heading"><strong>Instructions</strong></div>
+			<div class="panel-body">
+				<p>Please read the instructions before beginning:</p>
+				<ul>
+					<li>This HIT consists of 20 sections. Please complete all the questions.</li>
+					<li>Each section consists of the same 3 questions, but the topic will change in each section.</li>
+					<li>Please make sure you read the topic above each section and answer the questions with that topic in mind.</li></br>
+					<li><u>Question 1:</u> Please visit the Wikipedia URL provided in the links section and check to make sure the article exists and has not been deleted or made up.</li>
+					<li><u>Question 2:</u> Please pick the best description of the topic. If you do not know what the topic is, feel free to use the Google News link to see if there were any recent articles.
+						<ul>
+							<li>Currently Trending: The topic has been in the news over the past 2 days and there have been many recently published articles on the topic.</li>
+							<li>Recently Trending: There were a lot of articles published 3-7 days ago, but it's popularity has lowered in the past day or two.</li>
+							<li>Not Trending: This topic has not appeared in the news or popular culture at all over the past week.</li>
+						</ul></br>
+						Be careful of topics that are continually popular, like President Obama. While it may seem like he is trending all the time, and there may be articles about him, he is not considered trending unless he is above his usual level of popularity.
+					</li>
+					<li><u>Question 3:</u>Give a one line description of why the topic is trending. This can be taken from your own knowledge or from a news headline. It should give some insight into why people currently find the topic important.</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Instructions -->
+		<!-- Survey Body -->
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded01}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL01}"> ${WikiURL01}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL01}"> ${NewsURL01}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist01" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist01" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist01" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance01" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance01" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance01" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why01" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded02}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL02}"> ${WikiURL02}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL02}"> ${NewsURL02}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist02" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist02" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist02" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance02" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance02" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance02" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why02" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded03}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL03}"> ${WikiURL03}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL03}"> ${NewsURL03}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist03" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist03" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist03" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance03" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance03" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance03" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why03" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded04}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL04}"> ${WikiURL04}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL04}"> ${NewsURL04}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist04" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist04" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist04" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance04" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance04" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance04" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why04" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded05}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL05}"> ${WikiURL05}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL05}"> ${NewsURL05}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist05" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist05" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist05" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance05" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance05" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance05" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why05" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded06}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL06}"> ${WikiURL06}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL06}"> ${NewsURL06}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist06" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist06" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist06" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance06" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance06" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance06" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why06" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded07}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL07}"> ${WikiURL07}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL07}"> ${NewsURL07}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist07" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist07" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist07" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance07" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance07" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance07" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why07" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded08}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL08}"> ${WikiURL08}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL08}"> ${NewsURL08}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist08" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist08" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist08" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance08" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance08" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance08" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why08" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded09}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL09}"> ${WikiURL09}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL09}"> ${NewsURL09}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist09" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist09" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist09" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance09" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance09" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance09" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why09" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded10}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL10}"> ${WikiURL10}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL10}"> ${NewsURL10}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist10" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist10" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist10" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance10" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance10" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance10" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why10" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded11}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL11}"> ${WikiURL11}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL11}"> ${NewsURL11}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist11" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist11" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist11" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance11" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance11" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance11" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why11" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded12}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL12}"> ${WikiURL12}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL12}"> ${NewsURL12}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist12" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist12" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist12" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance12" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance12" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance12" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why12" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded13}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL13}"> ${WikiURL13}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL13}"> ${NewsURL13}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist13" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist13" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist13" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance13" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance13" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance13" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why13" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded14}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL14}"> ${WikiURL14}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL14}"> ${NewsURL14}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist14" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist14" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist14" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance14" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance14" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance14" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why14" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded15}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL15}"> ${WikiURL15}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL15}"> ${NewsURL15}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist15" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist15" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist15" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance15" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance15" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance15" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why15" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded16}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL16}"> ${WikiURL16}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL16}"> ${NewsURL16}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist16" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist16" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist16" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance16" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance16" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance16" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why16" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded17}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL17}"> ${WikiURL17}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL17}"> ${NewsURL17}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist17" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist17" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist17" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance17" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance17" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance17" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why17" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded18}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL18}"> ${WikiURL18}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL18}"> ${NewsURL18}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist18" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist18" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist18" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance18" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance18" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance18" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why18" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded19}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL19}"> ${WikiURL19}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL19}"> ${NewsURL19}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist19" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist19" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist19" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance19" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance19" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance19" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why19" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
+				<div class="row col-xs-12 col-md-12 links"><b>Links/Resources:</b></br><span><u>Topic:</u> ${Decoded20}</span></br><span><u>Wikipedia Link:</u><a href="${WikiURL20}"> ${WikiURL20}</a></span></br><span><u>Google News Link:</u><a href="${NewsURL20}"> ${NewsURL20}</a></span></br><span><u>Nonexistent Page:</u><a href="http://i.imgur.com/pgKhX8a.png"> http://i.imgur.com/pgKhX8a.png</a></span></br><span><u>Deleted Page:</u><a href="http://i.imgur.com/1SrDoCS.png"> http://i.imgur.com/1SrDoCS.png</a></span></br></div>
+				<div class="row col-xs-6 col-md-6 question1">
+					<b>1. Does the wikipedia page exist?</b></br>(Look above for an image of a nonexistant/deleted page) 
+					<div class="radio"><label><input class="q1input" name="Exist20" type="radio" value="Yes" checked="true"/>This Page Exists </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist20" type="radio" value="No"/>The Page Does Not Exist </label></div>
+					<div class="radio"><label><input class="q1input" name="Exist20" type="radio" value="Deleted"/>The Page Has Been Deleted </label></div>
+				</div>
+				<div class="row col-xs-6 col-md-6 question2">
+					<b>2. Which of the following best describes the topic's relevance? </b></br>(See instructions for clarification on choices)
+					<div class="radio"><label><input class="q2input" name="Relevance20" type="radio" value="Current" checked="true"/>Currently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance20" type="radio" value="Recent"/>Was Recently Trending</label></div>
+					<div class="radio"><label><input class="q2input" name="Relevance20" type="radio" value="Not"/>Not Trending</label></div>
+				</div>
+				<div class="row col-xs-12 col-md-12 question3">
+					<div class="question input-group"><label>3. Why is/was this topic trending?</label><input class="form-control q3input" name="Why20" size="120" type="text"/></div>
+				</div>
+			</fieldset>
+		</section>
+		<!-- End Survey Body -->
+	</div>
+</section>
+<!-- close container -->
+<style type="text/css">
+fieldset { padding: 10px; background:#D8E6E6; border-radius:20px; margin-bottom:20px; }
+.links {padding-bottom: 10px;}
+.question1 {padding-bottom: 10px;}
+</style>
+<script>
+</script>
