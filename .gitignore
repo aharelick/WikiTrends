@@ -2,6 +2,9 @@
 /build/
 /bin/
 target/
+Java/April2014/
+Java/*.txt
+Java/*.csv
  
 # OS Files #
 .DS_Store
